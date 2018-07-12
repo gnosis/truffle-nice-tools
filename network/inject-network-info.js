@@ -27,13 +27,13 @@ module.exports = () => {
       _.merge(artifactData.networks, networks);
       fs.writeFileSync(file, JSON.stringify(artifactData, null, 2));
     });
-    error(
-      chalk.red.bold(
-        `ERROR: missing build artifact ${file}; make sure contracts are compiled, by running truffle compile`
-      )
-    );
+      error(
+        chalk.red.bold(
+          `ERROR: missing build artifact ${file}; make sure contracts are compiled, by running truffle compile`
+        )
+      );
   log(
     chalk.green("Sucessfully injected network data into the build directory")
   );
-
+  spinner.stop();
 };

@@ -1,18 +1,15 @@
-### Truffle-nice-tools
-A simple (very very simple right now) yet nice toolset for  [Truffle Framework](https://truffleframework.com/) development.
+## Truffle-nice-tools
+A very simple, yet *nice* CLI interface toolkit for  [Truffle Framework](https://truffleframework.com/) development.
 
+(Note: this toolkit uses the excellent new NPX feature of NPM to save you from a useless global install. Don't be shy. The format is npx <command>)
 
-##### Injecting & Extracting Networks
-As Plato say, > You don't need the entire build/contracts folder to make great Truffles, only the __networks:__ part.
+### Commands
 
+##### Generic
+```npx tnt help, npx tnt -h..................Opens the help menu.
+npx tnt version, npx tnt -v...............Check the version.```
 
-To extract your networks information into a simple `networks.json` file in your root repository, run:
-```
-npx tnt extract-networks
-```
-
-To import an already existing `networks.json` file, merging the networks stored within with your freshly compiled `build/contracts` folder.
-```
-npx tnt inject-networks
-```
+##### Network Extraction / Injection
+```npx tnt extractNetworks, npx tnt eN.......Extracts relevant network data from your build/contracts repository. Storing it in networks.json.
+npx tnt injectNetworks, npx tnt iN........Injects the stored data from the networks.json file into the build/contracts ABI files via merge (it will overwrite conflicts, be warned)```
 
