@@ -1,6 +1,6 @@
 {
   "name": "truffle-nice-tools",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "A set CLI tools that make truffle development feel more elegant.",
   "main": "index.js",
   "scripts": {
