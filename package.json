@@ -14,7 +14,8 @@
     "Tools"
   ],
   "author": {
-    "name": ""
+    "name": "Anton Shtylman",
+    "email": "anton.shtylman@gnosis.pm"
   },
   "engines": {
     "node": ">=8"
