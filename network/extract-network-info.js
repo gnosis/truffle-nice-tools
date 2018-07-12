@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+const ora = require("ora");
 const fs = require("fs");
 const path = require("path");
 const _ = require("lodash");
@@ -7,6 +7,7 @@ const _ = require("lodash");
 const dir = path.join("build", "contracts");
 
 module.exports = () => {
+  const spinner = ora().start();
   try {
     const dirFiles = fs.readdirSync(dir);
 
@@ -31,10 +32,13 @@ module.exports = () => {
           2
         )
       );
+      spinner.stop();
     });
   } catch (err) {
     if (err.code === "ENOENT") {
       fs.writeFileSync("networks.json", "{}");
+      console.log('Didn\'t find any networks. Creating an empty file');
+      spinner.stop();
     } else {
       throw err;
     }

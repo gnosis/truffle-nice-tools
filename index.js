@@ -11,7 +11,6 @@ const { log } = console;
 
 module.exports = (() => {
   const args = minimist(process.argv.slice(2));
-  console.log(args);
 
   let cmd = args._[0] || "help";
 
@@ -21,11 +20,13 @@ module.exports = (() => {
   if (args.help || args.h) {
       cmd = 'help';
   }
-  console.log('cmd', cmd);
+
   switch (cmd) {
+    case 'eN':
     case 'extractNetworks':
       require('./network/extract-network-info.js')(args);
       break;
+    case 'iN':
     case 'injectNetworks':
       require('./network/inject-network-info.js')(args);
       break;
@@ -36,7 +37,7 @@ module.exports = (() => {
       require('./generic/help')(args);
       break;
     default:
-      console.error(`${cmd} is not a valid command! Try out \`npx tnt help\` to access a list of valid commands`);
+      console.error(`${chalk.red.bold(cmd)} ${chalk.bold('is not a valid command! Try')} ${chalk.red.bold('tnt help')} ${chalk.bold('to access a list of valid commands')}`);
       break;
   }
 })();

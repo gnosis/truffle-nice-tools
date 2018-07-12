@@ -2,15 +2,15 @@ const menus = {
     main: `
     tnt [command] <options>
 
-    injectNetwork..........inject the networks.json file into your artifacts
-    extractNetwork.........extract the real network data from artifacts into networks.json
+    injectNetworks, iN..........inject the networks.json file into your artifacts
+    extractNetworks, eN.........extract the real network data from artifacts into networks.json
 
-    version................show current version
-    help...................show help menu for a command
+    version, -v.............show current version
+    help, -h................show help menu for a command
     `,
 
-    injectNetwork: `
-        tnt injectNetwork <options>
+    injectNetworks: `
+        tnt injectNetwork <options> 
 
         --path, -p specify a custom directory to the truffle artifacts folder
     `,
