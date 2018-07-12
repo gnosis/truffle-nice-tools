@@ -3,6 +3,9 @@ A very simple, yet *nice* CLI interface toolkit for  [Truffle Framework](https:/
 
 (Note: this toolkit uses the excellent new NPX feature of NPM to save you from a useless global install. Don't be shy. The format is npx <command>)
 
+### Install
+Run `npm i -D truffle-nice-tools` inside your [Truffle Framework](https://truffleframework.com/) project.
+
 ### Commands
 
 ##### Generic
