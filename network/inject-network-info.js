@@ -15,23 +15,19 @@ module.exports = () => {
   _.toPairs(contractNetworksMap)
     .map(([name, networks]) => [path.join(dir, name + ".json"), networks])
     .filter(([file, _networks]) => {
-      if (!fs.existsSync(file)) 
-      error(
-        chalk.red.bold(
-          `ERROR: missing build artifact ${file}; make sure contracts are compiled, by running truffle compile`
-        )
-      );
+      if (!fs.existsSync(file)) {
+        error(
+          chalk.red.bold(
+            `ERROR: missing build artifact ${file}; make sure contracts are compiled, by running truffle compile`
+          )
+        );
+      }
     })
     .forEach(([file, networks]) => {
       const artifactData = JSON.parse(fs.readFileSync(file));
       _.merge(artifactData.networks, networks);
       fs.writeFileSync(file, JSON.stringify(artifactData, null, 2));
     });
-      error(
-        chalk.red.bold(
-          `ERROR: missing build artifact ${file}; make sure contracts are compiled, by running truffle compile`
-        )
-      );
   log(
     chalk.green("Sucessfully injected network data into the build directory")
   );
