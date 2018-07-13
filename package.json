@@ -1,5 +1,5 @@
 {
-  "name": "truffle-nice-tools",
+  "name": "@gnosis.pm/truffle-nice-tools",
   "version": "1.0.11",
   "description": "A set CLI tools that make truffle development feel more elegant.",
   "main": "index.js",
@@ -21,9 +21,7 @@
     "node": ">=8"
   },
   "bin": {
-    "tnt": "./index.js",
-    "inject-networks": "./network/inject-network-info.js",
-    "extract-networks": "./network/extract-network-info.js"
+    "tnt": "./cli.js"
   },
   "license": "MIT",
   "dependencies": {
