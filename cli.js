@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
+const fs = require("fs");
 const path = require("path");
 const _ = require("lodash");
 
@@ -15,29 +15,38 @@ module.exports = (() => {
   let cmd = args._[0] || "help";
 
   if (args.version || args.v) {
-      cmd = 'version';
-  } 
+    cmd = "version";
+  }
   if (args.help || args.h) {
-      cmd = 'help';
+    cmd = "help";
   }
 
   switch (cmd) {
-    case 'eN':
-    case 'extractNetworks':
-      require('./network/extract-network-info.js')(args);
+    case "eN":
+    case "extractNetworks":
+      require("./network/extract-network-info.js")(args);
       break;
-    case 'iN':
-    case 'injectNetworks':
-      require('./network/inject-network-info.js')(args);
+    case "iN":
+    case "injectNetworks":
+      require("./network/inject-network-info.js")(args);
       break;
-      case 'version': 
-      require('./generic/version')(args);
+    case "mG":
+    case "measureGas":
+      require('./gas/measureGas.js')(args);
+    case "version":
+      require("./generic/version")(args);
       break;
-      case 'help':
-      require('./generic/help')(args);
+    case "help":
+      require("./generic/help")(args);
       break;
     default:
-      console.error(`${chalk.red.bold(cmd)} ${chalk.bold('is not a valid command! Try')} ${chalk.red.bold('tnt help')} ${chalk.bold('to access a list of valid commands')}`);
+      console.error(
+        `${chalk.red.bold(cmd)} ${chalk.bold(
+          "is not a valid command! Try"
+        )} ${chalk.red.bold("tnt help")} ${chalk.bold(
+          "to access a list of valid commands"
+        )}`
+      );
       break;
   }
 })();

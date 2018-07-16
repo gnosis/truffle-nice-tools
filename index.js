@@ -10,9 +10,6 @@ const { log } = console;
 // module export an object that includes the two functions
 const testGas = require('./gas/testGas.js');
 
-
-
-
 module.exports = {
   testGas
 };

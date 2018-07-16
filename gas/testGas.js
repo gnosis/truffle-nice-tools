@@ -1,7 +1,9 @@
-const fs = require("fs");
-const _ = require("lodash");
+const fs = require('fs');
+const _ = require('lodash');
+const path = require('path');
 
-const gasStatsFile = "build/gas-stats.json";
+const gasStatsFolder = 'gas';
+const gasStatsFile = path.join(gasStatsFolder, 'gas-stats.json');
 
 function setupProxiesForGasStats(instance, gasStats) {
   new Set(instance.abi.filter(({ type }) => type === "function")).forEach(
@@ -63,12 +65,20 @@ function createGasStatCollectorBeforeHook(contracts) {
 
 function createGasStatCollectorAfterHook(contracts) {
   return () => {
-    let existingData;
-
     if (process.env.COLLECT_GAS_STATS) {
+      let existingData;
+
       const collectedData = _.fromPairs(
         contracts.map(contract => [contract.contract_name, contract.gasStats])
       );
+
+      try {
+        if (!fs.existsSync(gasStatsFolder)) {
+          fs.mkdirSync(gasStatsFolder);
+        }
+      } catch (e) {
+        console.warn('Could not create the `gas` folder for gas stats storage.');
+      }
 
       try {
         existingData = JSON.parse(fs.readFileSync(gasStatsFile));

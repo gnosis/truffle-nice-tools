@@ -4,7 +4,7 @@ A very simple, yet *nice* CLI interface toolkit for  [Truffle Framework](https:/
 (Note: this toolkit uses the excellent new NPX feature of NPM to save you from a useless global install. Don't be shy. The format is npx <command>)
 
 ### Install
-Run `npm i -D truffle-nice-tools` inside your [Truffle Framework](https://truffleframework.com/) project.
+Run `npm i -D @gnosis.pm/truffle-nice-tools` inside your [Truffle Framework](https://truffleframework.com/) project.
 
 ### Commands
 
@@ -23,11 +23,13 @@ npx tnt injectNetworks, npx tnt iN........Injects the stored data from the netwo
 The Gas Testing module is created to give you more accurate `gas cost` representation stats, through injecting gas collection stats into your tests and outputting the data. Allowing you to accurately appropriate gas costs for your functions (note: you will want to include a little bit over the `max amount` to account)
 
 1. Require the Gas Testing module from TNT suite.
-...`const gasTest = require('truffle-nice-tools').gasTest`
+...`const testGas = require('@gnosis.pm/truffle-nice-tools').testGas`
 
 2. In your Truffle Test files, where you wish to include gas collection. Perform these two steps:
-...* Create an array holding all the artifacts that you would like to include in the testing. 
-* `const testThese = [artifact1, artifact2, artifact3, artifact4]`
-...* Include these hooks in your tests (once per contract)
-*`before(utils.createGasStatCollectorBeforeHook(contracts))`
-*`after(utils.createGasStatCollectorAfterHook(contracts))`
+ + Create an array holding all the artifacts that you would like to include in the testing. 
+ `const testThese = [artifact1, artifact2, artifact3, artifact4]`
+  + Include these hooks in your tests (once per contract)
+     * `before(utils.createGasStatCollectorBeforeHook(testThese))`
+     * `after(utils.createGasStatCollectorAfterHook(testThese))`
+
+3. Include 

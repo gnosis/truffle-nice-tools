@@ -4,19 +4,24 @@ const fs = require("fs");
 const path = require("path");
 const _ = require("lodash");
 const chalk = require("chalk")
+const inheritanceMapFunction = require('./getInheritanceMap.js');
 
-module.exports = folder => {
-  const buildFolder = folder || "build";
-  const gasStatsFile = path.join(buildFolder, "gas-stats.json");
+module.exports = args => {
+
+  const inheritanceMap = inheritanceMapFunction(args);
+ 
+
+  const gasStatsFolder = "gas";
+  const gasStatsFile = path.join(gasStatsFolder, "gas-stats.json");
 
   try {
-    if (!fs.exists(buildFolder, (err, res) => {
-        fs.mkdirSync(buildFolder);
+    if (!fs.exists(gasStatsFolder, (err, res) => {
+        fs.mkdirSync(gasStatsFolder);
       })
     );
   } catch (e) {
     if (e.code !== "EEXIST") {
-      console.warn(`Could not create ${buildFolder}: ${e}`);
+      console.warn(`Could not create ${gasStatsFolder}: ${e}`);
     }
   }
 
@@ -27,33 +32,33 @@ module.exports = folder => {
       console.warn(`Could not delete ${gasStatsFile}: ${e}`);
     }
   }
-
+  
   const newEnv = Object.assign({}, process.env);
   newEnv.COLLECT_GAS_STATS = true;
-  spawnSync("npm", ["test"], { stdio: "inherit", env: newEnv });
+  spawnSync("truffle", ["test"], { stdio: "inherit", env: newEnv });
 
   const gasStats = JSON.parse(fs.readFileSync(gasStatsFile));
 
-  // make sure this is toposorted
-  const inheritanceMap = [
-    ["Event", ["CategoricalEvent", "ScalarEvent"]],
-    ["StandardMarket", ["StandardMarketWithPriceLogger"]],
-    ["Market", ["StandardMarket"]],
-    ["MarketMaker", ["LMSRMarketMaker"]],
-    [
-      "Oracle",
-      [
-        "CentralizedOracle",
-        "DifficultyOracle",
-        "FutarchyOracle",
-        "MajorityOracle",
-        "SignedMessageOracle",
-        "UltimateOracle"
-      ]
-    ],
-    ["StandardToken", ["EtherToken", "OutcomeToken"]],
-    ["Token", ["StandardToken"]]
-  ];
+  // // make sure this is toposorted
+  // const inheritanceMap = [
+  //   ["Event", ["CategoricalEvent", "ScalarEvent"]],
+  //   ["StandardMarket", ["StandardMarketWithPriceLogger"]],
+  //   ["Market", ["StandardMarket"]],
+  //   ["MarketMaker", ["LMSRMarketMaker"]],
+  //   [
+  //     "Oracle",
+  //     [
+  //       "CentralizedOracle",
+  //       "DifficultyOracle",
+  //       "FutarchyOracle",
+  //       "MajorityOracle",
+  //       "SignedMessageOracle",
+  //       "UltimateOracle"
+  //     ]
+  //   ],
+  //   ["StandardToken", ["EtherToken", "OutcomeToken"]],
+  //   ["Token", ["StandardToken"]]
+  // ];
 
   inheritanceMap.forEach(([parent, children]) => {
     const childrenData = children

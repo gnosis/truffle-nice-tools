@@ -1,0 +1,3 @@
+const BUILD_FOLDER;
+const CONTRACTS_FOLDER;
+const TESTS_FOLDER;
