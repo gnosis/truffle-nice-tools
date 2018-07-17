@@ -2,7 +2,7 @@ const fs = require('fs');
 const _ = require('lodash');
 const path = require('path');
 
-const gasStatsFolder = 'gas';
+const gasStatsFolder = 'build/gas';
 const gasStatsFile = path.join(gasStatsFolder, 'gas-stats.json');
 
 function setupProxiesForGasStats(instance, gasStats) {

@@ -1,24 +1,21 @@
 /* eslint-disable no-console */
+require("dotenv").load();
+
 const { spawnSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 const _ = require("lodash");
-const chalk = require("chalk")
-const inheritanceMapFunction = require('./getInheritanceMap.js');
+const chalk = require("chalk");
+const inheritanceMapFunction = require("./getInheritanceMap.js");
 
 module.exports = args => {
-
   const inheritanceMap = inheritanceMapFunction(args);
- 
 
-  const gasStatsFolder = "gas";
+  const gasStatsFolder = "build/gas";
   const gasStatsFile = path.join(gasStatsFolder, "gas-stats.json");
 
   try {
-    if (!fs.exists(gasStatsFolder, (err, res) => {
-        fs.mkdirSync(gasStatsFolder);
-      })
-    );
+    fs.mkdirSync(gasStatsFolder);
   } catch (e) {
     if (e.code !== "EEXIST") {
       console.warn(`Could not create ${gasStatsFolder}: ${e}`);
@@ -32,33 +29,12 @@ module.exports = args => {
       console.warn(`Could not delete ${gasStatsFile}: ${e}`);
     }
   }
-  
+
   const newEnv = Object.assign({}, process.env);
   newEnv.COLLECT_GAS_STATS = true;
   spawnSync("truffle", ["test"], { stdio: "inherit", env: newEnv });
 
   const gasStats = JSON.parse(fs.readFileSync(gasStatsFile));
-
-  // // make sure this is toposorted
-  // const inheritanceMap = [
-  //   ["Event", ["CategoricalEvent", "ScalarEvent"]],
-  //   ["StandardMarket", ["StandardMarketWithPriceLogger"]],
-  //   ["Market", ["StandardMarket"]],
-  //   ["MarketMaker", ["LMSRMarketMaker"]],
-  //   [
-  //     "Oracle",
-  //     [
-  //       "CentralizedOracle",
-  //       "DifficultyOracle",
-  //       "FutarchyOracle",
-  //       "MajorityOracle",
-  //       "SignedMessageOracle",
-  //       "UltimateOracle"
-  //     ]
-  //   ],
-  //   ["StandardToken", ["EtherToken", "OutcomeToken"]],
-  //   ["Token", ["StandardToken"]]
-  // ];
 
   inheritanceMap.forEach(([parent, children]) => {
     const childrenData = children

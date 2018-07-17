@@ -4,7 +4,7 @@ A very simple, yet *nice* CLI interface toolkit for  [Truffle Framework](https:/
 (Note: this toolkit uses the excellent new NPX feature of NPM to save you from a useless global install. Don't be shy. The format is npx <command>)
 
 ### Install
-Run `npm i -D @gnosis.pm/truffle-nice-tools` inside your [Truffle Framework](https://truffleframework.com/) project.
+Run `npm i -D truffle-nice-tools` inside your [Truffle Framework](https://truffleframework.com/) project.
 
 ### Commands
 
@@ -19,17 +19,43 @@ npx tnt extractNetworks, npx tnt eN.......Extracts relevant network data from yo
 npx tnt injectNetworks, npx tnt iN........Injects the stored data from the networks.json file into the build/contracts ABI files via merge (it will overwrite conflicts, be warned)
 ```
 
-##### Gas Testing Accurately
-The Gas Testing module is created to give you more accurate `gas cost` representation stats, through injecting gas collection stats into your tests and outputting the data. Allowing you to accurately appropriate gas costs for your functions (note: you will want to include a little bit over the `max amount` to account)
+##### Gas Benchmarking
+The Gas Benchmarking module is created to give you more accurate `gas cost` representation stats, through injecting gas collection stats into your tests and outputting the data. 
 
 1. Require the Gas Testing module from TNT suite.
-...`const testGas = require('@gnosis.pm/truffle-nice-tools').testGas`
+...`const gasTest = require('truffle-nice-tools').gasTest`
 
 2. In your Truffle Test files, where you wish to include gas collection. Perform these two steps:
  + Create an array holding all the artifacts that you would like to include in the testing. 
- `const testThese = [artifact1, artifact2, artifact3, artifact4]`
+     * `const testThese = [artifact1, artifact2, artifact3, artifact4]`
   + Include these hooks in your tests (once per contract)
-     * `before(utils.createGasStatCollectorBeforeHook(testThese))`
-     * `after(utils.createGasStatCollectorAfterHook(testThese))`
+     * `before(gasTest.createGasStatCollectorBeforeHook(testThese))`
+     * `after(gasTest.createGasStatCollectorAfterHook(testThese))`
+3. Create a JSON file holding a mapping (preferably topologically sorted) of your contract heirarchy you want benchmarked in the format shown below:
+```
+{
+    "Event": ["CategoricalEvent", "ScalarEvent"],
+    "StandardMarket": ["StandardMarketWithPriceLogger"],
+    "Market": ["StandardMarket"],
+    "MarketMaker": ["LMSRMarketMaker"],
+    "Oracle": [
+        "CentralizedOracle",
+        "DifficultyOracle",
+        "FutarchyOracle",
+        "MajorityOracle",
+        "SignedMessageOracle",
+        "UltimateOracle"
+      ],
+    "StandardToken": ["EtherToken", "OutcomeToken"],
+    "Token": ["StandardToken"]
+}
+```
+  * ( The first index holds the contract for gas measurements, the second index holds its inheritance tree. This list should be topologically sorted for maximum benchmarking efficiency. )
+4. Execute this command:
+```
+npx tnt measureGas -f <path to .json mapping file>
+``` 
 
-3. Include 
+This will generate benchmarks for your function gas usage, derived from your test cases stored at `build/gas-stats.json`. 
+
+*(Pro-Tip: If you are having errors with compiling, npx will attempt to use the local Truffle install, make sure your compiler versions are the same, if you are normally using a global Truffle install. )*

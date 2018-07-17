@@ -4,6 +4,7 @@ const menus = {
 
     injectNetworks, iN..........inject the networks.json file into your artifacts
     extractNetworks, eN.........extract the real network data from artifacts into networks.json
+    measureGas, mG..............creates gas benchmarks from your test cases, outputs to the console and writes a JSON file.
 
     version, -v.............show current version
     help, -h................show help menu for a command
@@ -20,6 +21,12 @@ const menus = {
 
         --path, -p specify a custom directory to the truffle artifacts folder
     `,
+
+    measureGas:`
+        tnt measureGas <options> 
+        
+        -f specify a .JSON file to import a topologically sorted mapping of your contracts for benchmarking. 
+    `
 }
 
 module.exports = (args) => {
