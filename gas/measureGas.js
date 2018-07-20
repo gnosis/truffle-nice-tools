@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 require("dotenv").load();
 
-const { spawnSync } = require("child_process");
+const { execSync } = require("child_process");
 const fs = require('fs-extra')
 const path = require("path");
 const _ = require("lodash");
@@ -24,7 +24,9 @@ module.exports = args => {
   const newEnv = Object.assign({}, process.env);
   newEnv.COLLECT_GAS_STATS = true;
   newEnv.GAS_STATS_FILE = gasStatsFile;
-  spawnSync("truffle", ["test"], { stdio: "inherit", env: newEnv });
+
+  const testCommand = args['test-command'] || "truffle test";
+  execSync(testCommand, { stdio: "inherit", env: newEnv });
 
   const gasStats = JSON.parse(fs.readFileSync(gasStatsFile));
 

@@ -62,4 +62,10 @@ This will generate benchmarks for your function gas usage, derived from your tes
 npx tnt measureGas -f <path to .json mapping file> -o <path to your desired gas-stats location>
 ```
 
+The gas measurement tool will run `truffle test` by default, but if you'd like to use a different testing command, you may specify it via the `--test-command` option:
+
+```
+npx tnt measureGas -f <path to .json mapping file> --test-command 'npm test'
+```
+
 *(Pro-Tip: If you are having errors with compiling, npx will attempt to use the local Truffle install, make sure your compiler versions are the same, if you are normally using a global Truffle install. )*
