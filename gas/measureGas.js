@@ -2,7 +2,7 @@
 require("dotenv").load();
 
 const { spawnSync } = require("child_process");
-const fs = require("fs");
+const fs = require('fs-extra')
 const path = require("path");
 const _ = require("lodash");
 const chalk = require("chalk");
@@ -11,16 +11,7 @@ const inheritanceMapFunction = require("./getInheritanceMap.js");
 module.exports = args => {
   const inheritanceMap = inheritanceMapFunction(args);
 
-  const gasStatsFolder = "build/gas";
-  const gasStatsFile = path.join(gasStatsFolder, "gas-stats.json");
-
-  try {
-    fs.mkdirSync(gasStatsFolder);
-  } catch (e) {
-    if (e.code !== "EEXIST") {
-      console.warn(`Could not create ${gasStatsFolder}: ${e}`);
-    }
-  }
+  const gasStatsFile = path.join("build", "gas", "gas-stats.json");
 
   try {
     fs.unlinkSync(gasStatsFile);
@@ -74,5 +65,5 @@ module.exports = args => {
     console.log();
   });
 
-  fs.writeFileSync(gasStatsFile, JSON.stringify(gasStats, null, 2));
+  fs.outputFileSync(gasStatsFile, JSON.stringify(gasStats, null, 2));
 };

@@ -1,9 +1,8 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const _ = require('lodash');
 const path = require('path');
 
-const gasStatsFolder = 'build/gas';
-const gasStatsFile = path.join(gasStatsFolder, 'gas-stats.json');
+const gasStatsFile = path.join('build', 'gas', 'gas-stats.json');
 
 function setupProxiesForGasStats(instance, gasStats) {
   new Set(instance.abi.filter(({ type }) => type === "function")).forEach(
@@ -73,17 +72,9 @@ function createGasStatCollectorAfterHook(contracts) {
       );
 
       try {
-        if (!fs.existsSync(gasStatsFolder)) {
-          fs.mkdirSync(gasStatsFolder);
-        }
-      } catch (e) {
-        console.warn('Could not create the `gas` folder for gas stats storage.');
-      }
-
-      try {
         existingData = JSON.parse(fs.readFileSync(gasStatsFile));
       } catch (e) {
-        fs.writeFileSync(gasStatsFile, JSON.stringify(collectedData, null, 2));
+        fs.outputFileSync(gasStatsFile, JSON.stringify(collectedData, null, 2));
         return;
       }
 
@@ -103,7 +94,7 @@ function createGasStatCollectorAfterHook(contracts) {
         }
       });
 
-      fs.writeFileSync(gasStatsFile, JSON.stringify(existingData, null, 2));
+      fs.outputFileSync(gasStatsFile, JSON.stringify(existingData, null, 2));
     }
   };
 }
