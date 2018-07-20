@@ -56,6 +56,16 @@ The Gas Benchmarking module is created to give you more accurate `gas cost` repr
 npx tnt measureGas -f <path to .json mapping file>
 ``` 
 
-This will generate benchmarks for your function gas usage, derived from your test cases stored at `build/gas-stats.json`. 
+This will generate benchmarks for your function gas usage, derived from your test cases. The stats are stored at `build/gas/gas-stats.json` by default, but may be modified with the `-o` option:
+
+```
+npx tnt measureGas -f <path to .json mapping file> -o <path to your desired gas-stats location>
+```
+
+The gas measurement tool will run `truffle test` by default, but if you'd like to use a different testing command, you may specify it via the `--test-command` option:
+
+```
+npx tnt measureGas -f <path to .json mapping file> --test-command 'npm test'
+```
 
 *(Pro-Tip: If you are having errors with compiling, npx will attempt to use the local Truffle install, make sure your compiler versions are the same, if you are normally using a global Truffle install. )*

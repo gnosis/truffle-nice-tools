@@ -27,6 +27,7 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "dotenv": "^6.0.0",
+    "fs-extra": "^7.0.0",
     "lodash": "^4.17.10",
     "minimist": "^1.2.0",
     "ora": "^3.0.0"
