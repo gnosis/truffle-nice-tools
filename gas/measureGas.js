@@ -11,7 +11,7 @@ const inheritanceMapFunction = require("./getInheritanceMap.js");
 module.exports = args => {
   const inheritanceMap = inheritanceMapFunction(args);
 
-  const gasStatsFile = path.join("build", "gas", "gas-stats.json");
+  const gasStatsFile = args.o || path.join("build", "gas", "gas-stats.json");
 
   try {
     fs.unlinkSync(gasStatsFile);
@@ -23,6 +23,7 @@ module.exports = args => {
 
   const newEnv = Object.assign({}, process.env);
   newEnv.COLLECT_GAS_STATS = true;
+  newEnv.GAS_STATS_FILE = gasStatsFile;
   spawnSync("truffle", ["test"], { stdio: "inherit", env: newEnv });
 
   const gasStats = JSON.parse(fs.readFileSync(gasStatsFile));

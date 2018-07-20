@@ -2,7 +2,7 @@ const fs = require('fs-extra');
 const _ = require('lodash');
 const path = require('path');
 
-const gasStatsFile = path.join('build', 'gas', 'gas-stats.json');
+const gasStatsFile = process.env.GAS_STATS_FILE;
 
 function setupProxiesForGasStats(instance, gasStats) {
   new Set(instance.abi.filter(({ type }) => type === "function")).forEach(
