@@ -23,14 +23,14 @@ npx tnt injectNetworks, npx tnt iN........Injects the stored data from the netwo
 The Gas Benchmarking module is created to give you more accurate `gas cost` representation stats, through injecting gas collection stats into your tests and outputting the data. 
 
 1. Require the Gas Testing module from TNT suite.
-...`const gasTest = require('@gnosis.pm/truffle-nice-tools').gasTest`
+...`const testGas = require('@gnosis.pm/truffle-nice-tools').testGas`
 
 2. In your Truffle Test files, where you wish to include gas collection. Perform these two steps:
  + Create an array holding all the artifacts that you would like to include in the testing. 
      * `const testThese = [artifact1, artifact2, artifact3, artifact4]`
   + Include these hooks in your tests (once per contract)
-     * `before(gasTest.createGasStatCollectorBeforeHook(testThese))`
-     * `after(gasTest.createGasStatCollectorAfterHook(testThese))`
+     * `before(testGas.createGasStatCollectorBeforeHook(testThese))`
+     * `after(testGas.createGasStatCollectorAfterHook(testThese))`
 3. Create a JSON file holding a mapping (preferably topologically sorted) of your contract heirarchy you want benchmarked in the format shown below:
 ```
 {
