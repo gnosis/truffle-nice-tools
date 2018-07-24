@@ -57,6 +57,13 @@ function createGasStatCollectorBeforeHook(contracts) {
           setupProxiesForGasStats(instance, contract.gasStats);
           return instance;
         };
+
+        const originalNew = contract.new;
+        contract.new = async function() {
+          const instance = await originalNew.apply(this, arguments);
+          setupProxiesForGasStats(instance, contract.gasStats);
+          return instance;
+        };
       });
     }
   };
