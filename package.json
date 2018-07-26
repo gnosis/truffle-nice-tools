@@ -4,7 +4,7 @@
   "description": "A set CLI tools that make truffle development feel more elegant.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha --timeout 5000"
   },
   "keywords": [
     "Ethereum",
@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "mocha": "^5.2.0",
-    "tmp": "0.0.33"
+    "tmp": "0.0.33",
+    "truffle": "^4.1.13"
   }
 }

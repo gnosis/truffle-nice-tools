@@ -1,13 +1,16 @@
 const assert = require('assert')
-const { spawnSync } = require('child_process')
-
-const { withFixture } = require('./utils')
+const fs = require('fs-extra')
+const path = require('path')
+const { withFixture, assertedSpawnSync } = require('./utils')
 
 describe('network tools', function () {
-  it('should extract network info from build artifacts', function () {
+  it('should extract empty network info from build artifacts containing no network info', function () {
     withFixture('basic-truffle-project', (dir) => {
-      const procRes = spawnSync('tnt', { cwd: dir })
-      assert.fail(procRes.stdout.toString())
+      assertedSpawnSync('truffle', ['compile'], { cwd: dir })
+      assertedSpawnSync('tnt', ['eN'], { cwd: dir })
+      const networksObj = fs.readJSONSync(path.join(dir, 'networks.json'))
+
+      assert.deepStrictEqual(networksObj, {})
     })
   })
 })
