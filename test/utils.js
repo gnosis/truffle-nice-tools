@@ -31,3 +31,15 @@ exports.assertSpawnSync = function assertSpawnSync() {
     procRes.stderr.toString()
   }`)
 }
+
+exports.assertFailingSpawnSync = function assertFailingSpawnSync() {
+  const procRes = spawnSync(...arguments)
+
+  assert.notEqual(procRes.status, 0, `spawnSync(...${
+    JSON.stringify(arguments, null, 2)
+  }) succeeded with stdout:\n\n${
+    procRes.stdout.toString()
+  }\n\nand stderr:\n\n${
+    procRes.stderr.toString()
+  }`)
+}
