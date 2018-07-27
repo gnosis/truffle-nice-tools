@@ -1,4 +1,4 @@
-const assert = require('assert')
+const { assert } = require('chai')
 const path = require('path')
 const fs = require('fs-extra')
 const tmp = require('tmp')
@@ -20,7 +20,7 @@ exports.withFixture = function withFixture(fixtureName, callback) {
   if(err) throw err
 }
 
-exports.assertedSpawnSync = function assertedSpawnSync() {
+exports.assertSpawnSync = function assertSpawnSync() {
   const procRes = spawnSync(...arguments)
 
   assert.equal(procRes.status, 0, `spawnSync(...${
