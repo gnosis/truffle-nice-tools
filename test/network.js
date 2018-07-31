@@ -31,18 +31,18 @@ describe('network tools', function () {
 
   it('should fail to inject network info when networks.json does not exist', function () {
     withFixture('basic-truffle-project', (dir) => {
-      const sampleNetworks = {
-        Migrations: { '9000': { address: '0x1234567890abcdef1234567890abcdef12345678' } },
-        BasicThing: { '9000': { address: '0xcafecafecafecafecafecafecafecafecafecafe' } },
-      }
-      fs.writeJSONSync(path.join(dir, 'networks.json'), sampleNetworks)
-
       assertFailingSpawnSync('tnt', ['iN'], { cwd: dir })
     })
   })
 
   it('should fail to inject network info when build artifacts do not exist', function () {
     withFixture('basic-truffle-project', (dir) => {
+      const sampleNetworks = {
+        Migrations: { '9000': { address: '0x1234567890abcdef1234567890abcdef12345678' } },
+        BasicThing: { '9000': { address: '0xcafecafecafecafecafecafecafecafecafecafe' } },
+      }
+      fs.writeJSONSync(path.join(dir, 'networks.json'), sampleNetworks)
+
       assertFailingSpawnSync('tnt', ['iN'], { cwd: dir })
     })
   })
