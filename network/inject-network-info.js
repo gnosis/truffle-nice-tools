@@ -19,9 +19,10 @@ module.exports = () => {
         error(
           chalk.red.bold(
             `ERROR: missing build artifact ${file}; make sure contracts are compiled, by running truffle compile`
-          )
+          ), true
         );
       }
+      return true
     })
     .forEach(([file, networks]) => {
       const artifactData = JSON.parse(fs.readFileSync(file));
