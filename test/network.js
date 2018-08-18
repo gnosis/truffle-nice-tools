@@ -17,8 +17,8 @@ describe('network tools', function () {
 
   it('should extract network info from build artifacts', function () {
     withFixture('basic-truffle-project', (dir) => {
-      assertSpawnSync('run-with-testrpc', ['-d', '-i', '123', 'truffle migrate'], { cwd: dir })
-      assertSpawnSync('run-with-testrpc', ['-m', '莱 既 茶 忙 瓦 穷 轻 添 斤 焦 农 如 详 亡 扰', '-i', '999', 'truffle migrate'], { cwd: dir })
+      assertSpawnSync('run-with-testrpc', ['-d', '-i', '123', 'truffle migrate --network local'], { cwd: dir })
+      assertSpawnSync('run-with-testrpc', ['-m', '莱 既 茶 忙 瓦 穷 轻 添 斤 焦 农 如 详 亡 扰', '-i', '999', 'truffle migrate --network local'], { cwd: dir })
       assertSpawnSync('tnt', ['eN'], { cwd: dir })
       const networksObj = fs.readJSONSync(path.join(dir, 'networks.json'))
 
