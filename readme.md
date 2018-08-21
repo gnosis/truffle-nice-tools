@@ -19,6 +19,10 @@ npx tnt extractNetworks, npx tnt eN.......Extracts relevant network data from yo
 npx tnt injectNetworks, npx tnt iN........Injects the stored data from the networks.json file into the build/contracts ABI files via merge (it will overwrite conflicts, be warned)
 ```
 
+#### Decoding
+```
+npx tnt decodeTransactions, npx tnt dT....Decodes the transactions which have occured on your network of choice, please use 
+
 ##### Gas Benchmarking
 The Gas Benchmarking module is created to give you more accurate `gas cost` representation stats, through injecting gas collection stats into your tests and outputting the data. 
 
