@@ -1,4 +1,5 @@
 require('dotenv').load();
+
 const abiDecoder = require('abi-decoder');
 const fs = require('fs');
 const Web3 = require('web3');

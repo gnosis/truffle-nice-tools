@@ -10,7 +10,6 @@ exports.withFixture = function withFixture(fixtureName, callback) {
   let err
   try {
     fs.copySync(path.join(__dirname, 'fixtures', fixtureName), tmpDir.name)
-
     callback(tmpDir.name)
   } catch(e) {
     err = e
@@ -22,7 +21,6 @@ exports.withFixture = function withFixture(fixtureName, callback) {
 
 exports.assertSpawnSync = function assertSpawnSync() {
   const procRes = spawnSync(...arguments)
-
   assert.equal(procRes.status, 0, `spawnSync(...${
     JSON.stringify(arguments, null, 2)
   }) failed with output status ${procRes.status}, stdout:\n\n${

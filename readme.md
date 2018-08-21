@@ -19,6 +19,11 @@ npx tnt extractNetworks, npx tnt eN.......Extracts relevant network data from yo
 npx tnt injectNetworks, npx tnt iN........Injects the stored data from the networks.json file into the build/contracts ABI files via merge (it will overwrite conflicts, be warned)
 ```
 
+#### Decoding
+```
+npx tnt decodeTransactions, npx tnt dT....Decodes the transactions which have occured on your network of choice. Check out  the available option flags with the npx help decodeTransactions command.  
+```
+
 ##### Gas Benchmarking
 The Gas Benchmarking module is created to give you more accurate `gas cost` representation stats, through injecting gas collection stats into your tests and outputting the data. 
 
@@ -69,3 +74,5 @@ npx tnt measureGas -f <path to .json mapping file> --test-command 'npm test'
 ```
 
 *(Pro-Tip: If you are having errors with compiling, npx will attempt to use the local Truffle install, make sure your compiler versions are the same, if you are normally using a global Truffle install. )*
+
+*Special Thanks to contributors Alan Lu (Cag) and Dominik Teiml (dteiml) for allowing the use of tools inn this toolkit.*
