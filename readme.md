@@ -73,3 +73,5 @@ npx tnt measureGas -f <path to .json mapping file> --test-command 'npm test'
 ```
 
 *(Pro-Tip: If you are having errors with compiling, npx will attempt to use the local Truffle install, make sure your compiler versions are the same, if you are normally using a global Truffle install. )*
+
+*Special Thanks to contributors Alan Lu (Cag) and Dominik Teiml (dteiml) for allowing the use of tools inn this toolkit.*

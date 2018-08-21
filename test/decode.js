@@ -5,7 +5,7 @@ const _ = require('lodash');
 const { withFixture, assertSpawnSync, assertFailingSpawnSync } = require('./utils');
 
 describe('Decode transactions', function() {
-  it('Should decode previous transactions on the chain', async () => {
+  it.skip('Should decode previous transactions on the chain', async () => {
     withFixture('basic-truffle-project', (dir) => {
         const decodeEnv = Object.assign({}, process.env);
         decodeEnv.ABIFOLDER = path.join(dir, 'build/contracts');
