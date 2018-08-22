@@ -5,7 +5,6 @@ const { execSync } = require("child_process");
 const fs = require('fs-extra')
 const path = require("path");
 const _ = require("lodash");
-const chalk = require("chalk");
 const inheritanceMapFunction = require("./getInheritanceMap.js");
 
 module.exports = args => {

@@ -11,10 +11,10 @@ const abiFolder = process.env.ABIFOLDER || path.resolve(__dirname, '../../../bui
 
 if (typeof web3 !== 'undefined') {
 	web3 = new Web3(web3.currentProvider);
-	// console.log('PORT: ', PORT, 'ABIFOLDER: ', abiFolder);
+	console.log('PORT: ', PORT, 'ABIFOLDER: ', abiFolder);
 } else {
 	web3 = new Web3(new Web3.providers.HttpProvider(`http://localhost:${PORT}`));
-	// console.log('PORT: ', PORT, 'ABIFOLDER: ', abiFolder);
+	console.log('PORT: ', PORT, 'ABIFOLDER: ', abiFolder);
 }
 
 const abis = []
