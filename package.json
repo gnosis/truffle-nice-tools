@@ -4,7 +4,7 @@
   "description": "A set CLI tools that make truffle development feel more elegant.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --timeout 30000"
+    "test": "mocha --timeout 50000"
   },
   "keywords": [
     "Ethereum",
@@ -25,12 +25,14 @@
   },
   "license": "MIT",
   "dependencies": {
+    "abi-decoder": "^1.2.0",
     "chalk": "^2.4.1",
     "dotenv": "^6.0.0",
     "fs-extra": "^7.0.0",
     "lodash": "^4.17.10",
     "minimist": "^1.2.0",
-    "ora": "^3.0.0"
+    "ora": "^3.0.0",
+    "web3": "^1.0.0-beta.35"
   },
   "devDependencies": {
     "chai": "^4.1.2",
