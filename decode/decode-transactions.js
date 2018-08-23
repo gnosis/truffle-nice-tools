@@ -189,6 +189,12 @@ const outputData = async (args) => {
 
 	if (args.contracts) {
 		const l = Math.max(names.length, addresses.length)
+		if (l === 0) {
+			log(`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`);
+			log(chalk.red(`There are no contracts to show`));
+			log(`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`);
+		}
+		
 		for (let i = 0; i < l; i++) {
 			const add = addresses[i] ? addresses[i] : 'not deployed' 
 			console.log(names[i], add)
