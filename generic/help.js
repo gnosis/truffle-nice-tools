@@ -8,7 +8,7 @@ const menus = {
     measureGas, mG..............creates gas benchmarks from your test cases, outputs to the console and writes a JSON file.
 
     version, -v.............show current version
-    help, -h................show help menu for a command
+    help <command>, -h......show help menu for a command
     `,
 
     injectNetworks: `
@@ -16,13 +16,21 @@ const menus = {
 
         --path, -p specify a custom directory to the truffle artifacts folder
     `,
+    iN: `
+    tnt injectNetwork, tnt iN <options> 
 
+    --path, -p specify a custom directory to the truffle artifacts folder
+    `,
     extractNetworks:`
         tnt extractNetworks, tnt eN <options>
 
         --path, -p specify a custom directory to the truffle artifacts folder
     `,
+    eN:`
+        tnt extractNetworks, tnt eN <options>
 
+        --path, -p specify a custom directory to the truffle artifacts folder
+    `,
     decodeTransactions:`
         tnt decodeTransactions, tnt dT <options>
 
@@ -31,11 +39,23 @@ const menus = {
         -e, specify the ending block at which to end decoding transactions on your network (defaults to the last block on the network.
         --contracts, list all contracts in your build folder and their deployed addresses.
     `,
+    dT:`
+        tnt decodeTransactions, tnt dT <options>
 
+        -s, specify the starting block at which to start decoding transactions on your network (defaults to the initial block).
+        -b, specify the specific block at which to decode transactions on your network.
+        -e, specify the ending block at which to end decoding transactions on your network (defaults to the last block on the network.
+        --contracts, list all contracts in your build folder and their deployed addresses.
+    `,
     measureGas:`
         tnt measureGas, tnt mG <options> 
         
-        -f specify a .JSON file to import a topologically sorted mapping of your contracts for benchmarking. 
+        -f, specify a .JSON file to import a topologically sorted mapping of your contracts for benchmarking. 
+    `,
+    mG:`
+        tnt measureGas, tnt mG <options> 
+        
+        -f, specify a .JSON file to import a topologically sorted mapping of your contracts for benchmarking. 
     `
 }
 

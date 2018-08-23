@@ -28,6 +28,7 @@ exports.assertSpawnSync = function assertSpawnSync() {
   }\n\nand stderr:\n\n${
     procRes.stderr.toString()
   }`)
+  return procRes;
 }
 
 exports.assertFailingSpawnSync = function assertFailingSpawnSync() {
@@ -40,4 +41,5 @@ exports.assertFailingSpawnSync = function assertFailingSpawnSync() {
   }\n\nand stderr:\n\n${
     procRes.stderr.toString()
   }`)
+  return procRes;
 }
