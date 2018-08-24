@@ -1,27 +1,37 @@
 ## Truffle-nice-tools
 A very simple, yet *nice* CLI interface toolkit for  [Truffle Framework](https://truffleframework.com/) development.
 
-(Note: this toolkit uses the excellent new NPX feature of NPM to save you from a useless global install. Don't be shy. The format is npx <command>)
+(Note: this toolkit uses the excellent new NPX feature of NPM to save you from a useless global install. Don't be shy. The format is npx \<command>)
 
 ### Install
 Run `npm i -D @gnosis.pm/truffle-nice-tools` inside your [Truffle Framework](https://truffleframework.com/) project.
 
-### Commands
+---
+Commands
+-----
 
 ##### Generic
 ```
-npx tnt help <command>, npx tnt -h........Opens the help menu.
+npx tnt help <command>, npx tnt -h........Opens the help menu. 
+```
+Find all the options and flags availabble in individual commands by running npx tnt \<commandname>. 
+```
 npx tnt version, npx tnt -v...............Check the version.
 ```
+---
 ##### Network Extraction / Injection
 ```
-npx tnt extractNetworks, npx tnt eN.......Extracts relevant network data from your build/contracts repository. Storing it in networks.json.
-npx tnt injectNetworks, npx tnt iN........Injects the stored data from the networks.json file into the build/contracts ABI files via merge (it will overwrite conflicts, be warned)
+npx tnt extractNetworks, npx tnt eN <options>.......Extracts relevant network data from your build/contracts repository. Storing it in networks.json.
+npx tnt injectNetworks, npx tnt iN <options>........Injects the stored data from the networks.json file into the build/contracts ABI files via merge (it will overwrite conflicts, be warned)
 ```
 
 ##### Decoding
 ```
-npx tnt decodeTransactions, npx tnt dT....Decodes the transactions which have occured on your network of choice, please use 
+npx tnt decodeTransactions, npx tnt dT <options>....Decodes the transactions which have occured on your network of choice.  
+```
+* In order to decode transactions, you will need to have an Ethereum network running, we check for port 8545 by default but if you would like to connect to a network at a different port, please simply update your process.env.CHAINPORT environment variable to the port of your Ethereum network.
+
+* By default, it is assumed your .json ABI files are located at `/build/contracts`. If you would like to change your ABI folder, please simply change the process.env.ABIFOLDER environment variable. 
 
 ##### Gas Benchmarking
 The Gas Benchmarking module is created to give you more accurate `gas cost` representation stats, through injecting gas collection stats into your tests and outputting the data. 
@@ -71,7 +81,7 @@ The gas measurement tool will run `truffle test` by default, but if you'd like t
 ```
 npx tnt measureGas -f <path to .json mapping file> --test-command 'npm test'
 ```
-
+---
 *(Pro-Tip: If you are having errors with compiling, npx will attempt to use the local Truffle install, make sure your compiler versions are the same, if you are normally using a global Truffle install. )*
 
-*Special Thanks to contributors Alan Lu (Cag) and Dominik Teiml (dteiml) for allowing the use of tools inn this toolkit.*
+> Special thanks to Alan Lu (@cag) and Dominik Teiml (@dteiml) for contributing the tools and ideas for this tool kit. 
