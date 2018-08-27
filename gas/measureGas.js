@@ -1,17 +1,21 @@
 /* eslint-disable no-console */
 require("dotenv").load();
-
-const { execSync } = require("child_process");
+const { execSync, spawnSync } = require("child_process");
 const fs = require('fs-extra')
 const path = require("path");
 const _ = require("lodash");
+const chalk = require("chalk");
 const inheritanceMapFunction = require("./getInheritanceMap.js");
 const gasFixtures = require('./gasFixtures.js');
 
 module.exports = args => {
   const inheritanceMap = inheritanceMapFunction(args);
+  gasFixtures.generateGasTests();
 
-  const gasStatsFile = args.o || path.join("build", "gas", "gas-stats.json");
+  let gasStatsFile = args.o || path.join("build", "gas", "gas-stats.json");
+  if (process.env.BUILDGASFILE) {
+    gasStatsFile = process.env.BUILDGASFILE
+  }  
 
   try {
     fs.unlinkSync(gasStatsFile);
@@ -24,11 +28,19 @@ module.exports = args => {
   const newEnv = Object.assign({}, process.env);
   newEnv.COLLECT_GAS_STATS = true;
   newEnv.GAS_STATS_FILE = gasStatsFile;
+  
+  // THESE ARE SUPPOSED TO BE REMOVED. They just exist to shwo what is happening in the fixtures. 
+  var dirList = execSync('ls gasTest', { stdio: 'pipe', env: newEnv, encoding: 'utf-8', maxBuffer: 10e19 });
+  console.log('DIRLIST', dirList.toString());
+  var dirList = execSync('cat gasTest/basic-thing.js', { stdio: 'pipe', env: newEnv, encoding: 'utf-8', maxBuffer: 10e19 });
+  console.log('FILELIST', dirList.toString());
 
-  const testCommand = args['test-command'] || "truffle test";
-  execSync(testCommand, { stdio: "inherit", env: newEnv });
-
+  const testCommand = process.env.GASTESTTESTINGDIRECTORY || "truffle test gasTests/**";
+  execSync(testCommand, { stdio: "inherit", env: newEnv, maxBuffer: 10e19 });
+  // NOTE: THE TEST COMMAND STILL FAILS HERE, BECAUSE OF .apply in testGas.js failure
+  console.log('1', gasStatsFile);
   const gasStats = JSON.parse(fs.readFileSync(gasStatsFile));
+  console.log('2', gasStatsFile);  
 
   inheritanceMap.forEach(([parent, children]) => {
     const childrenData = children
@@ -69,4 +81,5 @@ module.exports = args => {
   });
 
   fs.outputFileSync(gasStatsFile, JSON.stringify(gasStats, null, 2));
+  gasFixtures.deleteFolderRecursive(gasFixtures.gasTestDirectory);
 };

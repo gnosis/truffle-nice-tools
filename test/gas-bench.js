@@ -8,6 +8,10 @@ newEnv.GNOSIS_TNT_DEV_PATH = path.join(__dirname, '..');
 describe('gas benchmarking tools', function () {
   it('should run the test suite', function () {
     withFixture('basic-truffle-project', (dir) => {
+      newEnv.TESTDIR = path.join(dir, 'test');
+      newEnv.GASTESTDIR = path.join(dir, 'gasTest');
+      newEnv.GASTESTTESTINGDIRECTORY = 'truffle test ' + path.join(dir, 'gasTests');
+      newEnv.BUILDGASFILE = path.join(dir, 'build/gas/gas-stats.json');
       this.timeout(8000);
       const sync = assertSpawnSync('tnt', ['measureGas', '-f', 'inheritance-map.json'], { cwd: dir, env: newEnv, stdout: 'pipe' });
       // console.log('SYNCOUTPUT111', sync.output.toString());
@@ -16,6 +20,10 @@ describe('gas benchmarking tools', function () {
 
   it('Should not fail upon no inheritance map.', function () {
     withFixture('basic-truffle-project', (dir) => {
+      newEnv.TESTDIR = path.join(dir, 'test');
+      newEnv.GASTESTDIR = path.join(dir, 'gasTest');
+      newEnv.GASTESTTESTINGDIRECTORY = 'truffle test ' + path.join(__dirname, 'gasTests');
+      newEnv.BUILDGASFILE = path.join(dir, 'build/gas/gas-stats.json');
       this.timeout(8000);
       const sync = assertSpawnSync('tnt', ['mG'], { cwd: dir, env: newEnv, stdout: 'pipe' })
       // const syncOutput = sync.output.toString();
