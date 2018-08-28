@@ -33,6 +33,10 @@ module.exports = (() => {
     case "mG":
     case "measureGas":
       require('./gas/measureGas.js')(args);
+      break;
+    case "dT":
+    case "decodeTransactions":
+      require('./decode/decode-transactions.js')(args);
     case "version":
       require("./generic/version")(args);
       break;
