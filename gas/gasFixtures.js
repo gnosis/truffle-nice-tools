@@ -32,7 +32,7 @@ var generateGasTests = () => {
     options = {
       listeners: {
         file: function(root, fileStats, next) {
-          console.log(root);
+          // console.log(root);
           if (fileStats.name.match(/.js$/g)) {
             prependFile.sync(
               path.join(root, fileStats.name),

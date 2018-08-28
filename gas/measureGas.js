@@ -34,19 +34,15 @@ module.exports = args => {
   newEnv.GAS_STATS_FILE = gasStatsFile;
   
   // THESE ARE SUPPOSED TO BE REMOVED. They just exist to shwo what is happening in the fixtures. 
-  console.log('11', gasStatsFile, 'dirnname: ', __dirname);
-  var dirList = execSync('ls gasTests', { stdio: 'pipe', env: newEnv, encoding: 'utf-8', maxBuffer: 10e19 });
-  console.log('DIRLIST', dirList.toString());
-  var dirList = execSync('cat gasTests/basic-thing.js', { stdio: 'pipe', env: newEnv, encoding: 'utf-8', maxBuffer: 10e19 });
-  console.log('FILELIST', dirList.toString());
+  // var dirList = execSync('ls gasTests', { stdio: 'pipe', env: newEnv, encoding: 'utf-8', maxBuffer: 10e19 });
+  // console.log('DIRLIST', dirList.toString());
+  // var dirList = execSync('cat gasTests/basic-thing.js', { stdio: 'pipe', env: newEnv, encoding: 'utf-8', maxBuffer: 10e19 });
+  // console.log('FILELIST', dirList.toString());
   
   const testCommand = gasMockTestingDirectory || "truffle test gasTests/**";
-  console.log('GAS TESTING DIR: ', gasMockTestingDirectory);
   const innerExec = execSync(testCommand, { stdio: "inherit", env: newEnv, maxBuffer: 10e19 });
-  // NOTE: THE TEST COMMAND STILL FAILS HERE, BECAUSE OF .apply in testGas.js failure
-  console.log('1', gasStatsFile, 'dirnname: ', __dirname);
+
   const gasStats = JSON.parse(fs.readFileSync(gasStatsFile));
-  console.log('2', gasStatsFile);  
 
   inheritanceMap.forEach(([parent, children]) => {
     const childrenData = children

@@ -14,9 +14,9 @@ describe('gas benchmarking tools', function () {
       newEnv.GASTESTTESTINGDIRECTORY = 'truffle test ' + path.join(fixtureDir, 'gasTests/**');
       newEnv.BUILDGASFILE = path.join(fixtureDir, 'build/gas/gas-stats.json');
       newEnv.GAS_STATS_FILE = path.join(fixtureDir, 'build/gas/gas-stats.json');
+      
       this.timeout(50000);
       const sync = assertSpawnSync('tnt', ['measureGas', '-f', 'inheritance-map.json'], { cwd: fixtureDir, env: newEnv, stdout: 'pipe' });
-      console.log('SYNC:', sync);
     })
   });
 
@@ -27,16 +27,15 @@ describe('gas benchmarking tools', function () {
       newEnv.GASTESTTESTINGDIRECTORY = 'truffle test ' + path.join(fixtureDir, 'gasTests/**');
       newEnv.BUILDGASFILE = path.join(fixtureDir, 'build/gas/gas-stats.json');
       newEnv.GAS_STATS_FILE = path.join(fixtureDir, 'build/gas/gas-stats.json');
+      
       this.timeout(50000);
       const sync = assertSpawnSync('tnt', ['mG'], { cwd: fixtureDir, env: newEnv, stdout: 'pipe' })
-      console.log('sync2', sync);
-      // console.log('SYNCOUTPUT: ', sync.output);
-      // assert.equal(syncOutput.substr(0,3), '-- ');
+      const output = sync.output.toString();
+      let foundRightOutput = output.match(/-- Gas stats --/);
+      assert.notEqual(foundRightOutput, null);
+      let foundAvgKeyword = output.match(/avg/);
+      assert.equal(foundAvgKeyword[0], 'avg');
     })
-  });
-
-  it('Should automatically create a clone of the tests folder and prepend the require statement to it', function () {
-
   });
 });
 
