@@ -4,7 +4,8 @@
   "description": "A set CLI tools that make truffle development feel more elegant.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --timeout 50000"
+    "test": "mocha --timeout 50000",
+    "lint": "prettier --config ./.prettierrc.js ./**/*.js"
   },
   "keywords": [
     "Ethereum",
@@ -39,6 +40,7 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^5.2.0",
+    "prettier": "1.14.2",
     "run-with-testrpc": "^0.3.0",
     "tmp": "0.0.33",
     "truffle": "^4.1.13"
