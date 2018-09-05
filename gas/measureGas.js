@@ -33,13 +33,13 @@ module.exports = args => {
   newEnv.COLLECT_GAS_STATS = true;
   newEnv.GAS_STATS_FILE = gasStatsFile;
   
-  // THESE ARE SUPPOSED TO BE REMOVED. They just exist to shwo what is happening in the fixtures. 
-  var dirList = execSync('ls .hiddenOilWell', { stdio: 'pipe', env: newEnv, encoding: 'utf-8', maxBuffer: 10e19 });
-  console.log('DIRLIST', dirList.toString());
-  var dirList = execSync('cat .hiddenOilWell/basic-thing.js', { stdio: 'pipe', env: newEnv, encoding: 'utf-8', maxBuffer: 10e19 });
-  console.log('FILELIST', dirList.toString());
+  // // THESE ARE SUPPOSED TO BE REMOVED. They just exist to shwo what is happening in the fixtures. 
+  // var dirList = execSync('ls .hiddenOilWell', { stdio: 'pipe', env: newEnv, encoding: 'utf-8', maxBuffer: 10e19 });
+  // console.log('DIRLIST', dirList.toString());
+  // var dirList = execSync('cat .hiddenOilWell/basic-thing.js', { stdio: 'pipe', env: newEnv, encoding: 'utf-8', maxBuffer: 10e19 });
+  // console.log('FILELIST', dirList.toString());
   
-  const testCommand = gasMockTestingDirectory || "truffle test gasTests/**";
+  const testCommand = gasMockTestingDirectory || "truffle test .hiddenOilWell/**";
   try {
     const innerExec = execSync(testCommand, { stdio: "inherit", env: newEnv, maxBuffer: 10e19 });
   } catch (e) {

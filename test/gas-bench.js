@@ -31,6 +31,7 @@ describe('gas benchmarking tools', function () {
       this.timeout(50000);
       const sync = assertSpawnSync('tnt', ['mG'], { cwd: fixtureDir, env: newEnv, stdout: 'pipe' })
       const output = sync.output.toString();
+      console.log('Output\n', output);
       let foundRightOutput = output.match(/-- Gas stats --/);
       assert.notEqual(foundRightOutput, null);
       let foundAvgKeyword = output.match(/avg/);
