@@ -5,6 +5,8 @@ const _ = require('lodash');
 const { withFixture, assertSpawnSync, assertFailingSpawnSync } = require('./utils');
 
 describe('Decode transactions', function() {
+
+
   it('Should decode previous transactions on the chain', async () => {
     withFixture('basic-truffle-project', (dir) => {
         const decodeEnv = Object.assign({}, process.env);
@@ -31,8 +33,7 @@ describe('Decode transactions', function() {
         const decodeEnv = Object.assign({}, process.env);
         decodeEnv.ABIFOLDER = path.join(dir, 'build/contracts');
         // console.log('FIXTURE CREATED FOR TEST:', path.join(dir, 'build/contracts'));
-        
-        const spawnResult = assertSpawnSync('run-with-testrpc', ['tnt decodeTransactions --contracts'], 
+        const spawnResult = assertSpawnSync('run-with-testrpc', ['truffle compile && tnt decodeTransactions --contracts'], 
         {
             cwd: dir,
             env: decodeEnv,
@@ -40,9 +41,7 @@ describe('Decode transactions', function() {
 
         let output = spawnResult.stdout.toString();
         let transactions = output.match(/There are no transactions to show/);
-        let contracts = output.match(/There are no contracts to show/);
         assert.equal(transactions[0], 'There are no transactions to show');
-        assert.equal(contracts[0], 'There are no contracts to show');
     })        
   });  
 })

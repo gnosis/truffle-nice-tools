@@ -35,6 +35,7 @@ function setupProxiesForGasStats(instance, gasStats) {
         };
       const original = instance[fnName];
 
+      // HACK: This is support for estimateGas on public variable accessors
       if (original.estimateGas === undefined) {
         original.estimateGas = () => 
         function () {
