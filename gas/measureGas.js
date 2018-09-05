@@ -34,14 +34,19 @@ module.exports = args => {
   newEnv.GAS_STATS_FILE = gasStatsFile;
   
   // THESE ARE SUPPOSED TO BE REMOVED. They just exist to shwo what is happening in the fixtures. 
-  // var dirList = execSync('ls gasTests', { stdio: 'pipe', env: newEnv, encoding: 'utf-8', maxBuffer: 10e19 });
-  // console.log('DIRLIST', dirList.toString());
-  // var dirList = execSync('cat gasTests/basic-thing.js', { stdio: 'pipe', env: newEnv, encoding: 'utf-8', maxBuffer: 10e19 });
-  // console.log('FILELIST', dirList.toString());
+  var dirList = execSync('ls .hiddenOilWell', { stdio: 'pipe', env: newEnv, encoding: 'utf-8', maxBuffer: 10e19 });
+  console.log('DIRLIST', dirList.toString());
+  var dirList = execSync('cat .hiddenOilWell/basic-thing.js', { stdio: 'pipe', env: newEnv, encoding: 'utf-8', maxBuffer: 10e19 });
+  console.log('FILELIST', dirList.toString());
   
   const testCommand = gasMockTestingDirectory || "truffle test gasTests/**";
-  const innerExec = execSync(testCommand, { stdio: "inherit", env: newEnv, maxBuffer: 10e19 });
-
+  try {
+    const innerExec = execSync(testCommand, { stdio: "inherit", env: newEnv, maxBuffer: 10e19 });
+  } catch (e) {
+    console.log(`Could not execute the test command ${testCommand}: Error: ${e}`)
+  } finally {
+    fs.removeSync(gasFixtures.gasTestDirectory);
+  }
   const gasStats = JSON.parse(fs.readFileSync(gasStatsFile));
 
   inheritanceMap.forEach(([parent, children]) => {
@@ -83,5 +88,4 @@ module.exports = args => {
   });
 
   fs.outputFileSync(gasStatsFile, JSON.stringify(gasStats, null, 2));
-  gasFixtures.deleteFolderRecursive(gasFixtures.gasTestDirectory);
 };
