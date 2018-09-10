@@ -14,7 +14,7 @@ function setupProxiesForGasStats(instance, gasStats) {
           const result = await originalFn.apply(this, arguments);
 
           const datum = {
-            args: Array.from(arguments).slice(0, fnOutputs.length),
+            args: Array.from(arguments),
             gasUsed: _.has(result, "receipt")
               ? result.receipt.gasUsed
               : await estimateGas.apply(this, arguments)
@@ -114,7 +114,6 @@ function createGasStatCollectorAfterHook(contracts) {
         contracts.map(contract => [contract.contract_name, contract.gasStats])
       );
 
-      console.log('right before output file', process.env.GAS_STATS_FILE);
       try {
         existingData = JSON.parse(fs.readFileSync(gasStatsFile));
       } catch (e) {

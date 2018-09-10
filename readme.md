@@ -66,6 +66,7 @@ npx tnt measureGas -f <path to .json mapping file> -o <path to your desired gas-
     "StandardToken": ["EtherToken", "OutcomeToken"],
     "Token": ["StandardToken"]
 }
+```
 
 *(Pro-Tip: If you are having errors with compiling, npx will attempt to use the local Truffle install, make sure your compiler versions are the same, if you are normally using a global Truffle install. )*
 

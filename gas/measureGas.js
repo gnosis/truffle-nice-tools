@@ -41,7 +41,7 @@ module.exports = args => {
   
   const testCommand = gasMockTestingDirectory || "truffle test .hiddenOilWell/**";
   try {
-    const innerExec = execSync(testCommand, { stdio: "inherit", env: newEnv, maxBuffer: 10e19 });
+    execSync(testCommand, { stdio: "inherit", env: newEnv, maxBuffer: 10e19 });
   } catch (e) {
     console.log(`Could not execute the test command ${testCommand}: Error: ${e}`)
   } finally {
