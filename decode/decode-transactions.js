@@ -7,7 +7,7 @@ const path = require('path');
 const chalk = require('chalk');
 const { log } = console;
 const PORT = process.env.CHAINPORT || '8545';
-const abiFolder = process.env.ABIFOLDER || path.resolve(__dirname, '../../../build/contracts');
+const abiFolder = process.env.ABIFOLDER || path.resolve(__dirname, '../../../../build/contracts');
 
 if (typeof web3 !== 'undefined') {
 	web3 = new Web3(web3.currentProvider);
