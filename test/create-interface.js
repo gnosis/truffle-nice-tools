@@ -9,13 +9,26 @@ describe('Creating an interface from the ABI', function () {
         withFixture('basic-truffle-project', (dir) => {
             const interfaceEnv = Object.assign({}, process.env);
             
-            const spawnResult = assertSpawnSync('run-with-testrpc', ['truffle compile --all'], {
+            const spawnResult = assertSpawnSync('run-with-testrpc', ['truffle compile --all && tnt cI build/contracts/BasicThing.json -o contracts/'], {
                 cwd: dir, 
                 env: interfaceEnv
             });
 
-            let output = spawnResult.stdout.toString();
-            console.log(output);
+            const logDir = assertSpawnSync('ls', ['contracts'], {
+                cwd: dir,
+                env: interfaceEnv
+            });
+
+            let output = logDir.stdout.toString();
+            assert.match(output, /IBasicThing.sol/, "Outputs Match");
+
+            const checkFile = assertSpawnSync('cat', ['contracts/IBasicThing.sol'], {
+                cwd: dir,
+                env: interfaceEnv
+            });
+
+            let outputFile = checkFile.stdout.toString();
+            assert.match(outputFile, /interface/, "Interface keyword exists");
         })
     })
 })
