@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 // Credits: @rangelife
-
 var fs = require('fs');
 const path = require('path');
 const chalk = require('chalk');
 const { log } = console;
-const outputFolder = process.env.OUTPUTFOLDER || path.resolve(__dirname, '../../../../contracts');
 
-const createInterface = () => {
+const createInterface = (args) => {
+  const outputFolder = args.o || path.resolve(__dirname, '../../../../contracts');
+
   try {
 	var contractName = JSON.parse(fs.readFileSync(process.argv[3])).contractName;
     var abi = JSON.parse(fs.readFileSync(process.argv[3])).abi;
@@ -66,7 +66,7 @@ const createInterface = () => {
 	}
   }
   
-  /////////// Helper Functions
+  // Helper Functions
 
   function die(x) {
     console.error(chalk.red(x));
@@ -74,7 +74,7 @@ const createInterface = () => {
   }
 
   function dieUsage() {
-    die('Invalid Usage. Make sure you specify the correct .json ABI file using the -f flag');
+    die('Invalid Usage. Make sure you specify the correct .json ABI file. (Example: npx tnt cI build/contracts/abi.json)');
   }
 
   function dumpConstructor(entity) {

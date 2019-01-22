@@ -38,8 +38,8 @@ module.exports = (() => {
     case "decodeTransactions":
       require('./decode/decode-transactions.js')(args);
       break;
-    case "createInterface":
     case "cI":
+    case "createInterface":
       require('./abi/create-interface.js')(args);
       break;
     case "version":
