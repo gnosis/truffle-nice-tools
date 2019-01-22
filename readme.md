@@ -70,4 +70,7 @@ npx tnt measureGas -f <path to .json mapping file> -o <path to your desired gas-
 
 *(Pro-Tip: If you are having errors with compiling, npx will attempt to use the local Truffle install, make sure your compiler versions are the same, if you are normally using a global Truffle install. )*
 
-> Special thanks to Alan Lu (@cag) and Dominik Teiml (@dteiml) for contributing the tools and ideas for this tool kit. 
+> Special thanks to Alan Lu (@cag), Dominik Teiml (@dteiml), and @rangelife for contributing the tools and ideas for this tool kit. 
+
+###### Testing
+To run the test suite, make sure that the truffle-nice-tools package is npm linked by running `npm link` from inside the folder, then proceed to execute the `npm run test` command. 

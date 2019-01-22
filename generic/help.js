@@ -2,10 +2,11 @@ const menus = {
     main: `
     tnt [command] <options>
 
-    injectNetworks, iN..........inject the networks.json file into your artifacts
-    extractNetworks, eN.........extract the real network data from artifacts into networks.json
-    decodeTransactions, dT......decodes the transactions which have occured on your network of choice, listing them in the console.
-    measureGas, mG..............creates gas benchmarks from your test cases, outputs to the console and writes a JSON file.
+    injectNetworks, iN <options>..........inject the networks.json file into your artifacts
+    extractNetworks, eN <options>.........extract the real network data from artifacts into networks.json
+    decodeTransactions, dT <options>......decodes the transactions which have occured on your network of choice, listing them in the console.
+    measureGas, mG <options>..............creates gas benchmarks from your test cases, outputs to the console and writes a JSON file.
+    createInterface, cI <path>............creates a Solidity interface contract for the selected .json ABI.
 
     version, -v.............show current version
     help <command>, -h......show help menu for a command
@@ -17,9 +18,9 @@ const menus = {
         --path, -p specify a custom directory to the truffle artifacts folder
     `,
     iN: `
-    tnt injectNetwork, tnt iN <options> 
+        tnt injectNetwork, tnt iN <options> 
 
-    --path, -p specify a custom directory to the truffle artifacts folder
+        --path, -p specify a custom directory to the truffle artifacts folder
     `,
     extractNetworks:`
         tnt extractNetworks, tnt eN <options>
@@ -56,6 +57,12 @@ const menus = {
         tnt measureGas, tnt mG <options> 
         
         -f, specify a .JSON file to import a topologically sorted mapping of your contracts for benchmarking. 
+    `,
+    createInterface:`
+        tnt createInterface, tnt cI <path>
+    `,
+    cI:`
+        tnt createInterface, tnt cI <path>   
     `
 }
 
