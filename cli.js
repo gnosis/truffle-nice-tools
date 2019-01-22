@@ -37,6 +37,11 @@ module.exports = (() => {
     case "dT":
     case "decodeTransactions":
       require('./decode/decode-transactions.js')(args);
+      break;
+    case "cI":
+    case "createInterface":
+      require('./abi/create-interface.js')(args);
+      break;
     case "version":
       require("./generic/version")(args);
       break;
