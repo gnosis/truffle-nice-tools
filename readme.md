@@ -14,15 +14,14 @@ Commands
 ```
 npx tnt help <command>, npx tnt -h........Opens the help menu. 
 ```
-Find all the options and flags availabble in individual commands by running npx tnt \<commandname>. 
+Find all the options and flags availabble in individual commands by running npx tnt help <commandname>. 
 ```
 npx tnt version, npx tnt -v...............Check the version.
 ```
 ---
-##### Network Extraction / Injection
+##### Create Interface (from ABI)
 ```
-npx tnt extractNetworks, npx tnt eN <options>.......Extracts relevant network data from your build/contracts repository. Storing it in networks.json.
-npx tnt injectNetworks, npx tnt iN <options>........Injects the stored data from the networks.json file into the build/contracts ABI files via merge (it will overwrite conflicts, be warned)
+createInterface, cI <path to ABI> <options>....Creates a Solidity interface contract for the selected .json ABI.
 ```
 
 ##### Decoding
@@ -32,6 +31,12 @@ npx tnt decodeTransactions, npx tnt dT <options>....Decodes the transactions whi
 * In order to decode transactions, you will need to have an Ethereum network running, we check for port 8545 by default but if you would like to connect to a network at a different port, please simply update your process.env.CHAINPORT environment variable to the port of your Ethereum network.
 
 * By default, it is assumed your .json ABI files are located at `/build/contracts`. If you would like to change your ABI folder, please simply change the process.env.ABIFOLDER environment variable. 
+
+##### Network Extraction / Injection
+```
+npx tnt extractNetworks, npx tnt eN <options>.......Extracts relevant network data from your build/contracts repository. Storing it in networks.json.
+npx tnt injectNetworks, npx tnt iN <options>........Injects the stored data from the networks.json file into the build/contracts ABI files via merge (it will overwrite conflicts, be warned)
+```
 
 ##### Gas Benchmarking
 The Gas Benchmarking module is created to give you more accurate `gas cost` representation stats, through injecting gas collection stats into your tests and outputting the data. 

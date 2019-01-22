@@ -6,7 +6,7 @@ const menus = {
     extractNetworks, eN <options>.........extract the real network data from artifacts into networks.json
     decodeTransactions, dT <options>......decodes the transactions which have occured on your network of choice, listing them in the console.
     measureGas, mG <options>..............creates gas benchmarks from your test cases, outputs to the console and writes a JSON file.
-    createInterface, cI <path> <options>..creates a Solidity interface contract for the selected .json ABI.
+    createInterface, cI <path to ABI> <options>..creates a Solidity interface contract for the selected .json ABI.
 
     version, -v.............show current version
     help <command>, -h......show help menu for a command
@@ -59,12 +59,12 @@ const menus = {
         -f, specify a .JSON file to import a topologically sorted mapping of your contracts for benchmarking. 
     `,
     createInterface:`
-        createInterface, cI <path> <options>..creates a Solidity interface contract for the selected .json ABI.
+        createInterface, cI <path to ABI> <options>..creates a Solidity interface contract for the selected .json ABI.
 
         -o, specify an output directory path for the constructed interface.
     `,
     cI:`
-        createInterface, cI <path> <options>..creates a Solidity interface contract for the selected .json ABI.
+        createInterface, cI <path to ABI> <options>..creates a Solidity interface contract for the selected .json ABI.
         
         -o, specify an output directory path for the constructed interface.
     `
