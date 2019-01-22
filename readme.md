@@ -21,7 +21,7 @@ npx tnt version, npx tnt -v...............Check the version.
 ---
 ##### Create Interface (from ABI)
 ```
-createInterface, cI <path to ABI> <options>....Creates a Solidity interface contract for the selected .json ABI.
+npx tnt createInterface, cI <path to ABI> <options>....Creates a Solidity interface contract for the selected .json ABI.
 ```
 
 ##### Decoding
