@@ -42,6 +42,10 @@ module.exports = (() => {
     case "createInterface":
       require('./abi/create-interface.js')(args);
       break;
+    case "cB":
+    case "cleanBuild":
+      require('./contract/clean-build.js')(args);
+      break;
     case "version":
       require("./generic/version")(args);
       break;

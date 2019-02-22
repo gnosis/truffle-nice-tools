@@ -38,6 +38,13 @@ npx tnt extractNetworks, npx tnt eN <options>.......Extracts relevant network da
 npx tnt injectNetworks, npx tnt iN <options>........Injects the stored data from the networks.json file into the build/contracts ABI files via merge (it will overwrite conflicts, be warned)
 ```
 
+##### Truffle build cleaning (reduce file size)
+There are some parameters in truffle files like ast, legacyAST that are used by debuggers, usually you don't need that. 
+Also the sourcePath it's something personal, might be better to remove it from the public build.
+```
+npx tnt cleanBuild
+```
+
 ##### Gas Benchmarking
 The Gas Benchmarking module is created to give you more accurate `gas cost` representation stats, through injecting gas collection stats into your tests and outputting the data. 
 
