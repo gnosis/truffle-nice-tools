@@ -44,7 +44,7 @@ module.exports = (() => {
       break;
     case "cB":
     case "cleanBuild":
-      require('./contract/clean-buid.js')(args);
+      require('./contract/clean-build.js')(args);
       break;
     case "version":
       require("./generic/version")(args);
