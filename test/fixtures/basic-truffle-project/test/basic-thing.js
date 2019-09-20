@@ -9,5 +9,7 @@ contract('BasicThing', function(accounts) {
   it('checks the thing at the beginning', async () => {
     const basicThing = await BasicThing.deployed()
     assert(await basicThing.checkTheThing())
+    const basicThingCopy = await BasicThing.at(basicThing.address)
+    assert(await basicThingCopy.checkTheThing())
   })
 })
