@@ -89,9 +89,16 @@ function createGasStatCollectorBeforeHook(contracts) {
 
         const originalAt = contract.at;
         contract.at = function() {
-          const instance = originalAt.apply(this, arguments);
-          setupProxiesForGasStats(instance, contract.gasStats);
-          return instance;
+          const instanceQ = originalAt.apply(this, arguments);
+          if(typeof instanceQ.abi !== 'undefined') {
+            setupProxiesForGasStats(instanceQ, contract.gasStats);
+            return instanceQ;
+          } else {
+            return instanceQ.then(instance => (
+              setupProxiesForGasStats(instance, contract.gasStats),
+              instance
+            ));
+          }
         };
 
         const originalNew = contract.new;
